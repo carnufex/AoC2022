@@ -1,11 +1,52 @@
 ﻿public class Game
 {
 	public int Score { get; init; }
+	public int Score2 { get; init; }
 
 	public Game(char opponentPlay, char myMove)
 	{
 		Score = CalculateScore(opponentPlay, myMove);
+		Score2 = CalculateScorePart2(opponentPlay, myMove);
 	}
+
+	private int CalculateScorePart2(char oppenentPlays, char myMove)
+	{
+		int opp = ToValuePart2(oppenentPlays);
+		int turnPoint = ToValuePart2(myMove);
+
+		int playChoice = CheckWinPart2(opp, turnPoint);
+
+		return playChoice + turnPoint;
+	}
+
+	private int CheckWinPart2(int opponentPlays, int outcome) => opponentPlays switch
+	{
+		1 when outcome == 0 => 3,
+		1 when outcome == 3 => 1,
+		1 when outcome == 6 => 2,
+
+		2 when outcome == 0 => 1,
+		2 when outcome == 3 => 2,
+		2 when outcome == 6 => 3,
+
+		3 when outcome == 0 => 2,
+		3 when outcome == 3 => 3,
+		3 when outcome == 6 => 1,
+
+		_ => throw new ArgumentOutOfRangeException(nameof(opponentPlays), $"Not expected char  value: {opponentPlays}"),
+	};
+
+
+	private static int ToValuePart2(char chr) => chr switch
+	{
+		'A' => 1,
+		'B' => 2,
+		'C' => 3,
+		'X' => 0,
+		'Y' => 3,
+		'Z' => 6,
+		_ => throw new ArgumentOutOfRangeException(nameof(chr), $"Not expected char  value: {chr}"),
+	};
 
 	private int CalculateScore(char oppenentPlays, char myMove)
 	{

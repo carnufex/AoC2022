@@ -7,6 +7,11 @@
 		return Parse.Sum(x => x.Score);
 	}
 
+	public int Part2()
+	{
+		return Parse.Sum(x => x.Score2);
+	}
+
 	private IEnumerable<Game> Parse =>
 		from lines in input.Split("\r\n")
 		let games = lines.Split(" ").Select(char.Parse).ToList()
@@ -21,6 +26,6 @@ class cls
 
 		Day2 day2 = new Day2();
 		Console.WriteLine($"Part 1: {day2.Part1()}");
-		//Console.WriteLine($"Part 2: {day2.Part2()}");
+		Console.WriteLine($"Part 2: {day2.Part2()}");
 	}
 }
