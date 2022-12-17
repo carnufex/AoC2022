@@ -6,12 +6,12 @@ public class Day4
 
 	public int Part1()
 	{
-		return Parse.Count<bool>(t => t);
+		return Parse.Select(x => x.IsSubset()).Count(t => t);
 	}
 
-	public IEnumerable<bool> Parse =>
+	public IEnumerable<Section> Parse =>
 		from lines in input.Split("\r\n")
-		let section = new Section(lines).IsSubset()
+		let section = new Section(lines)
 		select section;
 }
 
